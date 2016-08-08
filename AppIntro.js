@@ -104,6 +104,9 @@ const defaulStyles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  btnContainer:{
+
+  }
 }
 
 export default class AppIntro extends Component {
@@ -222,55 +225,59 @@ export default class AppIntro extends Component {
     let controllBts;
     if (Platform.OS === 'ios') {
       controllBts =  (
-        <View style={this.styles.paginationContainer}>
-          <View style={this.styles.dotContainer}>
-            {dots}
+        <View style={this.styles.bottomCont}>
+          <View style={this.styles.paginationContainer}>
+            <View style={this.styles.dotContainer}>
+              {dots}
+            </View>
           </View>
-        </View>
-        <View style={this.styles.btnContainer}>
-          <Animated.View style={[this.styles.full, { height: 0 }, {
-              opacity: this.state.doneFadeOpacity,
-              transform: [{
-                translateX: this.state.skipFadeOpacity.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 20],
-                }),
-              }],
-            }]}
-            >
-              <View style={this.styles.full}>
-                <Text style={[this.styles.controllText, {
-                  color: rightTextColor, paddingRight: 30,
-                }]}
-                >{this.props.doneBtnLabel}</Text>
-              </View>
-          </Animated.View>
-          <Animated.View style={[this.styles.full, { height: 0 }, { opacity: this.state.nextOpacity }]}>
-            <TouchableOpacity style={this.styles.full}
-              onPress={ isDoneBtnShow ?
-                this.props.onDoneBtnClick : this.onNextBtnClick.bind(this, context)}
-            >
-             <Text style={[this.styles.nextButtonText, { color: rightTextColor }]}>{this.props.nextBtnLabel}</Text>
-            </TouchableOpacity>
-          </Animated.View>
+          <View style={this.styles.btnContainer}>
+            <Animated.View style={[this.styles.full, { height: 0 }, {
+                opacity: this.state.doneFadeOpacity,
+                transform: [{
+                  translateX: this.state.skipFadeOpacity.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 20],
+                  }),
+                }],
+              }]}
+              >
+                <View style={this.styles.full}>
+                  <Text style={[this.styles.controllText, {
+                    color: rightTextColor, paddingRight: 30,
+                  }]}
+                  >{this.props.doneBtnLabel}</Text>
+                </View>
+            </Animated.View>
+            <Animated.View style={[this.styles.full, { height: 0 }, { opacity: this.state.nextOpacity }]}>
+              <TouchableOpacity style={this.styles.full}
+                onPress={ isDoneBtnShow ?
+                  this.props.onDoneBtnClick : this.onNextBtnClick.bind(this, context)}
+              >
+               <Text style={[this.styles.nextButtonText, { color: rightTextColor }]}>{this.props.nextBtnLabel}</Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
         </View>
       );
     } else {
       controllBts = (
-        <View style={this.styles.paginationContainer}>
-          <View style={this.styles.dotContainer}>
-            {dots}
+        <View style={this.styles.bottomCont}>
+          <View style={this.styles.paginationContainer}>
+            <View style={this.styles.dotContainer}>
+              {dots}
+            </View>
           </View>
-        </View>
-        <View style={[this.styles.btnContainer, { height: 0, paddingBottom: 5 }]}>
-          <TouchableOpacity style={this.styles.full}
-          onPress={ isDoneBtnShow ?
-            this.props.onDoneBtnClick : this.onNextBtnClick.bind(this, context)}
-            >
-              <Text style={[this.styles.nextButtonText, { color: rightTextColor }]}>
-              {isDoneBtnShow ? this.props.doneBtnLabel : this.props.nextBtnLabel}
-              </Text>
-            </TouchableOpacity>
+          <View style={[this.styles.btnContainer, { height: 0, paddingBottom: 5 }]}>
+            <TouchableOpacity style={this.styles.full}
+            onPress={ isDoneBtnShow ?
+              this.props.onDoneBtnClick : this.onNextBtnClick.bind(this, context)}
+              >
+                <Text style={[this.styles.nextButtonText, { color: rightTextColor }]}>
+                {isDoneBtnShow ? this.props.doneBtnLabel : this.props.nextBtnLabel}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
       );
     }
